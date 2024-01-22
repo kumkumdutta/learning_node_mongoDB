@@ -48,7 +48,8 @@ export const Update = async ({ collectionname, filter, doccument }) => {
 export const Delete = async ({ collectionname, filter }) => {
   try {
     let data = await global.db.collection(collectionname).deleteOne(filter);
-    console.log(data);
+    // console.log(data);
+    console.log(data)
   } catch (error) {
     console.log(error);
   }
