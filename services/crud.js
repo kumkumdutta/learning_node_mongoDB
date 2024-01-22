@@ -34,6 +34,18 @@ export const findbyname = async ({ collectionname, name }) => {
   }
 };
 
+export const search = async ({collectionname , pattern})=>{
+  try {
+    const result = await global.db
+    .collection(collectionname)
+    .find({search_string : {$regex : pattern, $options:"i"}})
+    return result
+  } catch (error) {
+    console.log(error)
+  }
+
+}
+
 export const Update = async ({ collectionname, filter, doccument }) => {
   try {
     let data = await global.db

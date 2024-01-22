@@ -1,4 +1,4 @@
-import {   Delete, Update, find, findbyname, insert} from "../services/crud.js";
+import {   Delete, Update, find, findbyname, insert, search} from "../services/crud.js";
 import {ObjectId} from 'mongodb'
 
 export const createData = async (request, reply) => {
@@ -28,10 +28,21 @@ export const getDatabyKey = async (req, res) => {
     return res.status(200).send(data);
   } catch (err) {
     console.log(err);
-    return res.status(500).send(data);
+    return res.status(500).send(err);
   }
 };
 
+export const SearchData = async (req,res) => {
+  try {
+    let pattern = req.params.pattern
+
+   const data = await search({collectionname:'myDara',pattern:pattern})
+    return res.status(200).send(data)
+  } catch (error) {
+    console.log(error)
+    return res.status(500).send(error);
+  }
+}
 
 export const updateData = async (req,res)=>{
     try {
