@@ -1,9 +1,5 @@
-
-
 export const insert = async ({ collectionname, doccument }) => {
   try {
-   
-    console.log(doccument);
     await global.db.collection(collectionname).insertOne(doccument);
   } catch (error) {
     console.log(error);
@@ -34,17 +30,18 @@ export const findbyname = async ({ collectionname, name }) => {
   }
 };
 
-export const search = async ({collectionname , pattern})=>{
+export const search = async ({ collectionname, pattern }) => {
   try {
     const result = await global.db
-    .collection(collectionname)
-    .find({search_string : {$regex : pattern, $options:"i"}})
-    return result
-  } catch (error) {
-    console.log(error)
-  }
+      .collection(collectionname)
+      .find({ search_string: { $regex: pattern, $options: "i" } })
+      .toArray();
 
-}
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const Update = async ({ collectionname, filter, doccument }) => {
   try {
@@ -61,7 +58,7 @@ export const Delete = async ({ collectionname, filter }) => {
   try {
     let data = await global.db.collection(collectionname).deleteOne(filter);
     // console.log(data);
-    console.log(data)
+    console.log(data);
   } catch (error) {
     console.log(error);
   }

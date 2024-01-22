@@ -3,7 +3,9 @@ import {ObjectId} from 'mongodb'
 
 export const createData = async (request, reply) => {
   try {
-    let obj = request.body;
+    const {name,city,role,age} = request.body
+    let obj = {name,city,role,age,search_string : `${name}${city}${role}${age}`}
+    console.log(obj)
     await insert({ collectionname: "myData", doccument: obj });
     console.log(obj);
     return reply.send("new data created");
@@ -36,8 +38,9 @@ export const SearchData = async (req,res) => {
   try {
     let pattern = req.params.pattern
 
-   const data = await search({collectionname:'myDara',pattern:pattern})
-    return res.status(200).send(data)
+   const data = await search({collectionname:'myData',pattern:pattern})
+   console.log(pattern)
+   return res.status(200).send(data)
   } catch (error) {
     console.log(error)
     return res.status(500).send(error);
