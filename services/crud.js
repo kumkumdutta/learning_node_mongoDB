@@ -39,7 +39,7 @@ export const Update = async ({ collectionname, filter, doccument }) => {
     let data = await global.db
       .collection(collectionname)
       .updateOne(filter, { $set: doccument });
-    console.log(data);
+    // console.log(data);
   } catch (error) {
     console.log(error);
   }
